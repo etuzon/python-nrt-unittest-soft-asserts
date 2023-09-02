@@ -101,6 +101,13 @@ class SoftAsserts(unittest.TestCase):
         except AssertionError as e:
             self.__append_to_failures(e)
 
+    def soft_assert_not_almost_equal(self, first, second, delta, message=None):
+        try:
+            self.assertNotAlmostEqual(
+                first=first, second=second, delta=delta, msg=message)
+        except AssertionError as e:
+            self.__append_to_failures(e)
+
     def soft_assert_raises(self, exception, method: Callable, *args, **kwargs):
         try:
             method(*args, **kwargs)

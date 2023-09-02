@@ -91,6 +91,12 @@ class SoftAssertsTests(SoftAsserts):
             1.01, 1.02, 0.015, self.ERROR_MESSAGE_1)
         self.soft_assert_all()
 
+    def test_soft_assert_not_almost_equal(self):
+        self.soft_assert_not_almost_equal(1.0, 1.2, 0.1)
+        self.soft_assert_not_almost_equal(
+            1.01, 1.02, 0.001, self.ERROR_MESSAGE_1)
+        self.soft_assert_all()
+
     def test_soft_assert_raises(self):
         self.soft_assert_raises(ValueError, self.__raise_value_error)
         self.soft_assert_all()
@@ -189,6 +195,14 @@ class SoftAssertsTests(SoftAsserts):
         self.soft_assert_almost_equal(
             1.01, 1.02, 0.001, self.ERROR_MESSAGE_1)
         self.soft_assert_almost_equal(1.0, 1.1, 0.15)
+        assert len(self.failures) == 2
+        self.__verify_assert_all_raised_exception()
+
+    def test_soft_assert_not_almost_equal_fail(self):
+        self.soft_assert_not_almost_equal(1.0, 1.1, 0.15)
+        self.soft_assert_not_almost_equal(
+            1.01, 1.02, 0.015, self.ERROR_MESSAGE_1)
+        self.soft_assert_not_almost_equal(1.0, 1.2, 0.1)
         assert len(self.failures) == 2
         self.__verify_assert_all_raised_exception()
 
