@@ -3,7 +3,7 @@
 ![PyPI](https://img.shields.io/pypi/v/nrt-unittest-soft-asserts?color=blueviolet&style=plastic)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/nrt-unittest-soft-asserts?color=greens&style=plastic)
 ![PyPI - License](https://img.shields.io/pypi/l/nrt-unittest-soft-asserts?color=blue&style=plastic)
-![PyPI - Downloads](https://img.shields.io/pypi/dd/nrt-unittest-asserts?style=plastic)
+![PyPI - Downloads](https://img.shields.io/pypi/dd/nrt-unittest-soft-asserts?style=plastic)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/nrt-unittest-soft-asserts?color=yellow&style=plastic)
 [![Coverage Status](https://coveralls.io/repos/github/etuzon/python-nrt-unittest-soft-asserts/badge.svg)](https://coveralls.io/github/etuzon/pytohn-nrt-unittest-soft-asserts)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/etuzon/python-nrt-unittest-soft-asserts?style=plastic)
