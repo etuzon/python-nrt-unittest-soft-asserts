@@ -23,100 +23,146 @@ class SoftAsserts(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def soft_assert_true(self, condition, message=None):
+    def soft_assert_true(self, condition, message=None) -> bool:
         try:
             self.assertTrue(condition, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_false(self, condition, message=None):
+        return True
+
+    def soft_assert_false(self, condition, message=None) -> bool:
         try:
             self.assertFalse(condition, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_equal(self, first, second, message=None):
+        return True
+
+    def soft_assert_equal(self, first, second, message=None) -> bool:
         try:
             self.assertEqual(first, second, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_not_equal(self, first, second, message=None):
+        return True
+
+    def soft_assert_not_equal(self, first, second, message=None) -> bool:
         try:
             self.assertNotEqual(first, second, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_is(self, first, second, message=None):
+        return True
+
+    def soft_assert_is(self, first, second, message=None) -> bool:
         try:
             self.assertIs(first, second, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_is_not(self, first, second, message=None):
+        return True
+
+    def soft_assert_is_not(self, first, second, message=None) -> bool:
         try:
             self.assertIsNot(first, second, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_is_none(self, obj, message=None):
+        return True
+
+    def soft_assert_is_none(self, obj, message=None) -> bool:
         try:
             self.assertIsNone(obj, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_is_not_none(self, obj, message=None):
+        return True
+
+    def soft_assert_is_not_none(self, obj, message=None) -> bool:
         try:
             self.assertIsNotNone(obj, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_in(self, obj, container, message=None):
+        return True
+
+    def soft_assert_in(self, obj, container, message=None) -> bool:
         try:
             self.assertIn(obj, container, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_not_in(self, obj, container, message=None):
+        return True
+
+    def soft_assert_not_in(self, obj, container, message=None) -> bool:
         try:
             self.assertNotIn(obj, container, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_is_instance(self, obj, cls, message=None):
+        return True
+
+    def soft_assert_is_instance(self, obj, cls, message=None) -> bool:
         try:
             self.assertIsInstance(obj, cls, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_not_is_instance(self, obj, cls, message=None):
+        return True
+
+    def soft_assert_not_is_instance(self, obj, cls, message=None) -> bool:
         try:
             self.assertNotIsInstance(obj, cls, message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_almost_equal(self, first, second, delta, message=None):
+        return True
+
+    def soft_assert_almost_equal(self, first, second, delta, message=None) -> bool:
         try:
             self.assertAlmostEqual(first=first, second=second, delta=delta, msg=message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_not_almost_equal(self, first, second, delta, message=None):
+        return True
+
+    def soft_assert_not_almost_equal(self, first, second, delta, message=None) -> bool:
         try:
             self.assertNotAlmostEqual(
                 first=first, second=second, delta=delta, msg=message)
         except AssertionError as e:
             self.__append_to_failures(e)
+            return False
 
-    def soft_assert_raises(self, exception, method: Callable, *args, **kwargs):
+        return True
+
+    def soft_assert_raises(self, exception, method: Callable, *args, **kwargs) -> bool:
         try:
             method(*args, **kwargs)
             error = f'{exception} not raised'
             self.__append_to_failures(AssertionError(error))
+            return False
         except Exception as e:
             if not isinstance(e, exception):
                 error = f'{e} is not instance of {exception}'
                 self.__append_to_failures(AssertionError(error))
+                return False
+
+        return True
 
     def soft_assert_raises_with(self, exception, message=None):
         class AssertRaises:

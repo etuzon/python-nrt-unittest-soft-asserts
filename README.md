@@ -12,24 +12,24 @@
 
 ### Supported asserts:
 
-| Assert                                                           | Description                                                                                 | Example                                                                                                      |
-|------------------------------------------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| soft_assert_true(condition, message=None)                        | Verify that condition is True                                                               | self.soft_assert_true(a == b)                                                                                |
-| soft_assert_false(condition, message=None)                       | Verify that condition is False                                                              | self.soft_assert_false(a == b)                                                                               |
-| soft_assert_equal(first, second, message=None)                   | Verify that first is equal to second                                                        | self.soft_assert_equal(a, b)                                                                                 |
-| soft_assert_not_equal(first, second, message=None)               | Verify that first is not equal to second                                                    | self.soft_assert_not_equal(a, b)                                                                             |
-| soft_assert_is(first, second, message=None)                      | Verify that first and second are the same object                                            | self.soft_assert_is(a, b)                                                                                    |
-| soft_assert_is_not(first, second, message=None)                  | Verify that first and second are not the same object                                        | self.soft_assert_is_not(a, b)                                                                                |
-| soft_assert_is_none(obj, message=None)                           | Verify that obj is None                                                                     | self.soft_assert_is_none(a)                                                                                  |
-| soft_assert_is_not_none(obj, message=None)                       | Verify that obj is not None                                                                 | self.soft_assert_is_not_none(a)                                                                              |
-| soft_assert_in(obj, container, message=None)                     | Verify that obj is in container                                                             | self.soft_assert_in(a, [a, b, c])                                                                            |
-| soft_assert_not_in(obj, container, message=None)                 | Verify that obj is not in container                                                         | self.soft_assert_not_in(a, [b, c])                                                                           |
-| soft_assert_is_instance(obj, cls, message=None)                  | Verify that obj is instance of cls                                                          | self.soft_assert_is_instance(a, A)                                                                           |
-| soft_assert_is_not_instance(obj, cls, message=None)              | Verify that obj is not instance of cls                                                      | self.soft_assert_is_not_instance(a, B)                                                                       |
-| soft_assert_almost_equal(first, second, delta, message=None)     | Verify that first is almost equal to second<br/>and the different is equal or less to delta | self.soft_assert_almost_equal(1.001, 1.002, 0.1)                                                             |
-| soft_assert_not_almost_equal(first, second, delta, message=None) | Verify that first is not almost equal to second<br/>and the different is more than delta    | self.soft_assert_not_almost_equal(1.001, 1.002, 0.0001)                                                      |
-| soft_assert_raises(exception, method: Callable, *args, **kwargs) | Verify that method execution raise exception                                                | self.soft_assert_raises(TypeError, sum, 'a', 2)                                                              |
-| soft_assert_raises_with(exception, message=None)                 | Verify that execution in 'with' block raise exception                                       | with self.soft_assert_raised_with(ValueError):<br/>&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(ERROR_MESSAGE_1) |
+| Assert                                                           | Description                                                                                 | Example                                                                                                      | Return                                             |
+|------------------------------------------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
+| soft_assert_true(condition, message=None)                        | Verify that condition is True                                                               | self.soft_assert_true(a == b)                                                                                | True if assertion passes, False if assertion fails |
+| soft_assert_false(condition, message=None)                       | Verify that condition is False                                                              | self.soft_assert_false(a == b)                                                                               | True if assertion passes, False if assertion fails |
+| soft_assert_equal(first, second, message=None)                   | Verify that first is equal to second                                                        | self.soft_assert_equal(a, b)                                                                                 | True if assertion passes, False if assertion fails |
+| soft_assert_not_equal(first, second, message=None)               | Verify that first is not equal to second                                                    | self.soft_assert_not_equal(a, b)                                                                             | True if assertion passes, False if assertion fails |
+| soft_assert_is(first, second, message=None)                      | Verify that first and second are the same object                                            | self.soft_assert_is(a, b)                                                                                    | True if assertion passes, False if assertion fails |
+| soft_assert_is_not(first, second, message=None)                  | Verify that first and second are not the same object                                        | self.soft_assert_is_not(a, b)                                                                                | True if assertion passes, False if assertion fails |
+| soft_assert_is_none(obj, message=None)                           | Verify that obj is None                                                                     | self.soft_assert_is_none(a)                                                                                  | True if assertion passes, False if assertion fails |
+| soft_assert_is_not_none(obj, message=None)                       | Verify that obj is not None                                                                 | self.soft_assert_is_not_none(a)                                                                              | True if assertion passes, False if assertion fails |
+| soft_assert_in(obj, container, message=None)                     | Verify that obj is in container                                                             | self.soft_assert_in(a, [a, b, c])                                                                            | True if assertion passes, False if assertion fails |
+| soft_assert_not_in(obj, container, message=None)                 | Verify that obj is not in container                                                         | self.soft_assert_not_in(a, [b, c])                                                                           | True if assertion passes, False if assertion fails |
+| soft_assert_is_instance(obj, cls, message=None)                  | Verify that obj is instance of cls                                                          | self.soft_assert_is_instance(a, A)                                                                           | True if assertion passes, False if assertion fails |
+| soft_assert_is_not_instance(obj, cls, message=None)              | Verify that obj is not instance of cls                                                      | self.soft_assert_is_not_instance(a, B)                                                                       | True if assertion passes, False if assertion fails |
+| soft_assert_almost_equal(first, second, delta, message=None)     | Verify that first is almost equal to second<br/>and the different is equal or less to delta | self.soft_assert_almost_equal(1.001, 1.002, 0.1)                                                             | True if assertion passes, False if assertion fails |
+| soft_assert_not_almost_equal(first, second, delta, message=None) | Verify that first is not almost equal to second<br/>and the different is more than delta    | self.soft_assert_not_almost_equal(1.001, 1.002, 0.0001)                                                      | True if assertion passes, False if assertion fails |
+| soft_assert_raises(exception, method: Callable, *args, **kwargs) | Verify that method execution raise exception                                                | self.soft_assert_raises(TypeError, sum, 'a', 2)                                                              | True if assertion passes, False if assertion fails |
+| soft_assert_raises_with(exception, message=None)                 | Verify that execution in 'with' block raise exception                                       | with self.soft_assert_raised_with(ValueError):<br/>&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError(ERROR_MESSAGE_1) |                                                    |
                                                                                                                                                         
 
 In the end of each test, the soft asserts will be verified and the test will be marked as failed if any of the asserts failed.<br/>
@@ -77,7 +77,8 @@ class SoftAssertsExamplesTests(SoftAsserts):
     
     def test_01_assert_with_steps_test_will_fail(self):
         self.set_step(self.STEP_1)
-        self.soft_assert_true(False)
+        # result is False
+        result = self.soft_assert_true(False)
 
         self.set_step(self.STEP_2)
         self.soft_assert_true(False)
@@ -108,8 +109,8 @@ class SoftAssertsExamplesTests(SoftAsserts):
         """
         Test should not be skipped because {STEP_3} is not in failure steps.
         """
-        
-        self.soft_assert_true(True)
+        # result is True
+        result = self.soft_assert_true(True)
         self.soft_assert_all()
 ```
 
