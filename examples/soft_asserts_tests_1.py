@@ -39,8 +39,9 @@ class SoftAssertsExamples1Tests(SoftAsserts):
 
     def test_01_assert_with_steps_test_will_fail(self):
         self.set_step(self.STEP_1)
-        self.soft_assert_true(False)
-        self.logger.info('print info')
+        # result is False because assert_true failed
+        result = self.soft_assert_true(False)
+        self.logger.info(f'result: {result}')
 
         self.set_step(self.STEP_2)
         self.soft_assert_true(False)
