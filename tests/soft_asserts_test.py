@@ -225,7 +225,7 @@ class SoftAssertsTests(SoftAsserts):
     def test_fail_with_print_message(self):
         self.set_print_method(self.__print_message)
         self.soft_assert_true(False, self.ERROR_MESSAGE_1)
-        assert message == f'False is not true : {self.ERROR_MESSAGE_1}'
+        assert f'False is not true : {self.ERROR_MESSAGE_1}' in message
         self.__verify_assert_all_raised_exception()
 
     def test_fail_with_logger(self):

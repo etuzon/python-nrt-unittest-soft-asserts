@@ -1,7 +1,7 @@
 import os
 
 import nrt_unittest_soft_asserts
-from nrt_unittest_soft_asserts.test.tests_suite import TestsSuite
+from tests.tests_suite import TestsSuite
 
 
 PATH = os.path.dirname(__file__)

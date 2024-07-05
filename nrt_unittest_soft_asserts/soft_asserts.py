@@ -1,3 +1,6 @@
+import inspect
+import linecache
+import os
 import threading
 import unittest
 from dataclasses import dataclass
@@ -8,6 +11,13 @@ from typing import Callable, Optional
 class Failure:
     assertion_error: AssertionError
     step: str
+    file_path: str
+    code_line: str
+    line_number: int
+
+    def __str__(self):
+        return f'{self.assertion_error} ' \
+               f'[{self.file_path}: {self.line_number}] {self.code_line}'
 
 
 class SoftAsserts(unittest.TestCase):
@@ -210,8 +220,9 @@ class SoftAsserts(unittest.TestCase):
                                 [failure.step for failure in failures
                                  if failure.step is not None]))
 
-            raise AssertionError(
-                '\n'.join([str(failure.assertion_error) for failure in failures]))
+            errors = '\n'.join([str(failure) for failure in failures])
+
+            raise AssertionError(f'\n{errors}')
 
     def is_step_in_failure_steps(self, step: str) -> bool:
         return step in self.failure_steps
@@ -227,18 +238,30 @@ class SoftAsserts(unittest.TestCase):
 
     def __append_to_failures(self, assertion_error: AssertionError):
         with SoftAsserts._steps_lock:
-            self._failures.append(
-                Failure(assertion_error,
-                        SoftAsserts._current_step_map.get(self.__class__.__name__)))
-        self.__print_error_to_log(assertion_error)
+            file_path, code_line, line_number = \
+                self.__get_failure_file_path_and_line_code_and_line_number()
 
-    def __print_error_to_log(self, assertion_error):
+            step = SoftAsserts._current_step_map.get(self.__class__.__name__)
+
+            failure = \
+                Failure(
+                    assertion_error=assertion_error,
+                    step=step,
+                    file_path=file_path,
+                    code_line=code_line,
+                    line_number=line_number)
+
+            self._failures.append(failure)
+
+        self.__print_error_to_log(failure)
+
+    def __print_error_to_log(self, failure: Failure):
         self.__validate_params()
 
         if self._print_method:
-            self._print_method(str(assertion_error))
+            self._print_method(str(failure))
         elif self._logger:
-            self._logger.error(str(assertion_error))
+            self._logger.error(str(failure))
 
     def __validate_params(self):
         if self._logger and self._print_method:
@@ -275,3 +298,13 @@ class SoftAsserts(unittest.TestCase):
     @classmethod
     def unset_print_method(cls):
         cls._print_method = None
+
+    @classmethod
+    def __get_failure_file_path_and_line_code_and_line_number(cls):
+        frame = inspect.currentframe()
+        frame = frame.f_back.f_back.f_back
+        file_path = os.path.relpath(frame.f_code.co_filename)
+        line_number = frame.f_lineno
+        code_line = linecache.getline(file_path, line_number).strip()
+
+        return file_path, code_line, line_number
